@@ -1,0 +1,30 @@
+type: single
+agent:
+  name: test_agent
+  model: gemini-2.5-flash
+  description: Agente de teste para validar as skills
+  instruction: |
+    Você é um agente de TESTE.
+    Responda em português.
+    Use as ferramentas disponíveis quando necessário.
+  tools:
+    - SearchAgent
+    - read_repo
+    - get_datetime
+
+tools:
+  - name: SearchAgent
+    transport: pre_built
+    type: SearchAgent
+
+  - name: read_repo
+    transport: pre_built
+    type: read_repo_context
+    provider: github
+    connection_config:
+      username: ${GITHUB_USERNAME}
+      token: ${GITHUB_TOKEN}
+
+  - name: get_datetime
+    transport: pre_built
+    type: get_current_datetime

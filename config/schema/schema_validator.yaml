@@ -1,0 +1,143 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+title: "Agent Configuration Schema"
+type: object
+required:
+  - tools
+  - type
+  - agent
+properties:
+  tools:
+    type: array
+    items:
+      type: object
+      required:
+        - name
+        - transport
+      properties:
+        name:
+          type: string
+        transport:
+          type: string
+          enum: [sse, stdio, streamable]
+      allOf:
+        - if:
+            properties:
+              transport:
+                const: sse
+          then:
+            required: [url]
+            properties:
+              url:
+                type: string
+                format: uri
+        - if:
+            properties:
+              transport:
+                const: streamable
+          then:
+            required: [url]
+            properties:
+              url:
+                type: string
+                format: uri
+              headers:
+                type: object
+                additionalProperties:
+                  type: string
+        - if:
+            properties:
+              transport:
+                const: stdio
+          then:
+            required: [command]
+            properties:
+              command:
+                type: string
+              args:
+                type: array
+                items:
+                  type: string
+              env:
+                type: object
+                minProperties: 1
+                additionalProperties:
+                  type: string
+              tool_filter:
+                type: array
+                items:
+                  type: string
+      additionalProperties: false
+
+  type:
+    type: string
+    enum: [single, hierarchical, sequential, loop]
+
+  agent:
+    $ref: "#/definitions/agent"
+
+definitions:
+  agent:
+    type: object
+    required: [name, model, description, instruction]
+    properties:
+      name:
+        type: string
+      model:
+        type: string
+      description:
+        type: string
+      instruction:
+        type: string
+      tools:
+        type: array
+        items:
+          type: string
+      agents:
+        type: array
+        items:
+          $ref: "#/definitions/agent"
+      callbacks:
+        type: object
+        properties:
+          before_agent_callback:
+            type: array
+            items:
+              type: string
+          after_agent_callback:
+            type: array
+            items:
+              type: string
+          before_model_callback:
+            type: array
+            items:
+              type: string
+          after_model_callback:
+            type: array
+            items:
+              type: string
+          before_tool_callback:
+            type: array
+            items:
+              type: string
+          after_tool_callback:
+            type: array
+            items:
+              type: string
+        additionalProperties: false
+      generate_content_config:
+        type: object
+        properties:
+          temperature:
+            type: number
+          max_output_tokens:
+            type: integer
+          top_k:
+            type: integer
+          top_p:
+            type: number
+          thinking_budget:
+            type: integer
+        additionalProperties: false
+    additionalProperties: false
+
+additionalProperties: false
