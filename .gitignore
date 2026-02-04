@@ -94,6 +94,10 @@ _bmad
 _bmad-output
 .gemini/
 
-# Local files 
+# Local files
 repomix*
 roadmap.md
+
+# ADK session data and artifacts
+.adk/
+*/.adk/

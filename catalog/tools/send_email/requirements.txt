@@ -1,0 +1,2 @@
+# Dependências variam conforme o provider de email
+# Gmail: google-auth, google-auth-oauthlib

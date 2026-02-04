@@ -1,0 +1,52 @@
+name: analyze_performance
+version: 1.0.0
+description: Analisa performance do agente com métricas detalhadas, histórico e recomendações
+author: Eneva Foundations IA
+type: skill
+
+metadata:
+  category: observability
+  language: pt-BR
+
+triggers:
+  - "/analyze-performance"
+  - "/performance"
+  - "analise a performance"
+  - "como está a performance"
+
+tools_required: []
+
+callbacks_used:
+  - finops_before_model
+  - finops_after_model
+  - finops_after_agent
+  - translate_thought
+
+config:
+  # Preços por 1M tokens (USD) - Vertex AI
+  pricing:
+    gemini-2.5-pro:
+      input: 1.25
+      output: 5.00
+    gemini-2.5-flash:
+      input: 0.15
+      output: 0.60
+    gemini-2.5-flash-lite:
+      input: 0.075
+      output: 0.30
+    gemini-2.0-flash:
+      input: 0.10
+      output: 0.40
+    gemini-3-flash-preview:
+      input: 0.15
+      output: 0.60
+
+  # Thresholds para alertas
+  thresholds:
+    latency_warning_ms: 10000
+    latency_critical_ms: 30000
+    cost_warning_usd: 0.05
+    cost_critical_usd: 0.10
+    translation_overhead_pct: 20
+
+entry_point: skill:analyze_performance

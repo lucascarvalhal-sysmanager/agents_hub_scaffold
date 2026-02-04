@@ -1,0 +1,20 @@
+name: vertex_rag
+version: 1.0.0
+description: Ferramenta de RAG (Retrieval Augmented Generation) do Vertex AI
+author: Eneva Foundations IA
+type: function_tool
+
+metadata:
+  category: retrieval
+  requires_config: true
+
+dependencies: []
+
+entry_point: tool:build_vertex_rag_tool
+
+config:
+  name: retrieve_rag_documentation
+  description: ""
+  rag_corpus: ""
+  similarity_top_k: 10
+  vector_distance_threshold: 0.5

@@ -1,0 +1,13 @@
+name: google_search
+version: 1.0.0
+description: Agente especializado em buscas no Google
+author: Eneva Foundations IA
+type: agent_tool
+
+metadata:
+  category: search
+  model: gemini-2.5-flash
+
+dependencies: []
+
+entry_point: tool:search_agent_tool

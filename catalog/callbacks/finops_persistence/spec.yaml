@@ -1,0 +1,27 @@
+name: finops_persistence
+version: 1.0.0
+description: Serviço de persistência para relatórios FinOps
+author: Eneva Foundations IA
+type: service
+
+metadata:
+  category: finops
+  providers:
+    - bigquery
+
+dependencies: []
+
+entry_point: callback:PersistenceFactory
+
+exports:
+  - FinopsReport
+  - FinopsPersistenceService
+  - PersistenceFactory
+  - BigQueryProvider
+
+config:
+  provider_type: bigquery
+  bigquery:
+    project_id: ""
+    dataset_id: ""
+    table_id: ""

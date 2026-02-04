@@ -1,0 +1,17 @@
+name: smart_search_tool
+version: 1.0.0
+description: Pesquisa inteligente com resultados estruturados e categorizados
+author: Eneva Foundations IA
+type: agent_tool
+
+metadata:
+  category: search
+  model: gemini-2.5-flash
+
+skills_integrated:
+  - smart_search
+
+dependencies:
+  - google_search
+
+entry_point: tool:smart_search_tool

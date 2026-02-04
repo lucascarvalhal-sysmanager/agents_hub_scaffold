@@ -1,0 +1,27 @@
+name: smart_search
+version: 1.0.0
+description: Pesquisa inteligente com resultados estruturados, fontes e análise
+author: Eneva Foundations IA
+type: skill
+
+metadata:
+  category: search
+  language: pt-BR
+
+triggers:
+  - "/search"
+  - "/pesquisar"
+  - "pesquise sobre"
+  - "busque informações"
+
+tools_required:
+  - google_search
+
+config:
+  max_results: 5
+  include_sources: true
+  categorize_results: true
+  generate_summary: true
+  output_format: markdown
+
+entry_point: skill:smart_search

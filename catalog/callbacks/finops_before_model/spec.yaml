@@ -1,0 +1,14 @@
+name: finops_before_model
+version: 1.0.0
+description: Captura métricas iniciais antes da chamada ao modelo
+author: Eneva Foundations IA
+type: before_model_callback
+
+metadata:
+  category: finops
+  execution_order: 1
+
+dependencies:
+  - finops_persistence
+
+entry_point: callback:finops_before_model_callback

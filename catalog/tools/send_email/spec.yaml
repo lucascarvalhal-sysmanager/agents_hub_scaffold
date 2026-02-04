@@ -1,0 +1,17 @@
+name: send_email
+version: 1.0.0
+description: Envia emails usando serviço de email configurado
+author: Eneva Foundations IA
+type: function_tool
+
+metadata:
+  category: communication
+  requires_config: true
+
+dependencies: []
+
+entry_point: tool:send_email_tool
+
+config:
+  provider: gmail
+  connection_config: {}

@@ -1,0 +1,19 @@
+name: datetime_tool
+version: 1.0.0
+description: Ferramentas para obter data e hora atual
+author: Eneva Foundations IA
+type: function_tool
+
+metadata:
+  category: utility
+  languages:
+    - pt-BR
+    - en
+
+dependencies: []
+
+entry_point: tool:get_current_datetime
+
+exports:
+  - get_current_datetime
+  - formatted_date_today

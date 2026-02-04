@@ -1,0 +1,22 @@
+name: read_repo_context
+version: 1.0.0
+description: Lê o contexto de um repositório Git usando repomix
+author: Eneva Foundations IA
+type: async_function_tool
+
+metadata:
+  category: repository
+  requires_auth: true
+  external_deps:
+    - git
+    - npx
+    - repomix
+
+dependencies: []
+
+entry_point: tool:read_repo_context
+
+config:
+  provider: github
+  username: ""
+  token: ""
