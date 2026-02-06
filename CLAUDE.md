@@ -45,7 +45,7 @@ Scaffold/
 | `vertex_rag` | FunctionTool | RAG com Vertex AI |
 | `read_repo_context` | FunctionTool | Lê repositórios GitHub |
 | `send_email` | FunctionTool | Envia emails |
-| `datetime_tool` | FunctionTool | Data/hora atual (multi-idioma) |
+| `datetime_tool` | FunctionTool | Data/hora atual (PT, EN, ES) via dispatch_map |
 
 ### Skills (catalog/skills/)
 
@@ -176,6 +176,48 @@ pre_built_functions_map = {
 
 3. Exportar em `agents/utils/adk_pre_built_tools.py`
 
+4. Configurar no `config.yaml` usando `kind` (não `type`):
+```yaml
+tools:
+  - name: minha_tool
+    transport: pre_built
+    kind: minha_tool      # ← usar 'kind', não 'type'
+```
+
+## Padrão Dispatch Map
+
+Usado para extensibilidade sem criar múltiplas funções:
+
+```python
+# Dispatch baseado em DADOS (não funções)
+dispatch_map = {
+    "pt": { "days": [...], "months": [...], "format": "..." },
+    "en": { "days": [...], "months": [...], "format": "..." },
+}
+
+def get_current_datetime():
+    language = os.getenv("DATETIME_LANGUAGE", "pt")
+    trans = dispatch_map.get(language, dispatch_map["pt"])
+    # usa trans["days"], trans["months"], trans["format"]
+```
+
+**Para adicionar novo idioma:** apenas adicionar entrada no dispatch_map, sem criar nova função.
+
+## Diferença: type vs kind
+
+| Campo | Localização | Função |
+|-------|-------------|--------|
+| `type` | Raiz do YAML | Tipo de fluxo do agente (`single`, `hierarchical`, `sequential`) |
+| `kind` | Dentro de tool pre_built | Qual ferramenta pré-construída usar |
+
+```yaml
+type: single              # ← Fluxo do agente
+tools:
+  - name: get_datetime
+    transport: pre_built
+    kind: get_current_datetime  # ← Tipo da ferramenta
+```
+
 ## Próximos Passos Sugeridos
 
 1. Implementar mais skills (ex: `review_pr`, `daily_report`)
@@ -184,6 +226,15 @@ pre_built_functions_map = {
 4. Implementar cache para buscas repetidas
 
 ## Histórico de Desenvolvimento
+
+- **2026-02-06:** Refatoração de configuração e datetime_tool
+  - Renomeado campo `type` para `kind` nas tools pre_built (evita conflito com `type: single` do agente)
+  - Atualizado schema_validator.yaml para validar `kind`
+  - Unificado datetime_tool em uma única função `get_current_datetime(include_time=True)`
+  - Implementado padrão dispatch_map baseado em dados (não funções)
+  - Adicionado suporte a espanhol (ES) no datetime_tool
+  - Removida função `formatted_date_today` (substituída por `get_current_datetime(include_time=False)`)
+  - Alterado agente para responder no mesmo idioma da pergunta do usuário
 
 - **2026-02-04:** Implementação inicial do catálogo
   - Criado estrutura catalog/ com tools, skills e callbacks
@@ -195,8 +246,11 @@ pre_built_functions_map = {
 
 ## Arquivos Importantes
 
-- `config/agent/config.yaml` - Configuração do agente
+- `config/agent/config.yaml` - Configuração do agente (usa `kind` para pre_built tools)
+- `config/schema/schema_validator.yaml` - Validação de schema do config
 - `agents/core/adapters/agent_builder/adk_builder.py` - Construtor do agente
-- `agents/core/adapters/agent_builder/adk_tools_builder.py` - Construtor de tools
+- `agents/core/adapters/agent_builder/adk_tools_builder.py` - Construtor de tools (busca `kind`)
+- `agents/utils/prompt_functions.py` - FunctionTools para o agente
+- `catalog/tools/datetime_tool/tool.py` - Exemplo de dispatch_map baseado em dados
 - `catalog/callbacks/finops_after_agent/callback.py` - Integração skill + callback
 - `catalog/skills/analyze_performance/skill.py` - Lógica de análise de performance

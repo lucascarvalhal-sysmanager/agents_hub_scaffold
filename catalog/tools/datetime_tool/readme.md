@@ -1,39 +1,52 @@
 # Datetime Tool
 
-Ferramentas para obter data e hora atual em diferentes formatos.
+Ferramenta para obter data e hora atual em diferentes idiomas.
 
 ## Funcionalidade
 
-- `get_current_datetime()`: Data/hora em português do Brasil
-- `formatted_date_today()`: Data em inglês
+Uma única função `get_current_datetime()` que:
+- Retorna data/hora formatada
+- Suporta português (PT-BR) e inglês (EN-US)
+- Permite incluir ou omitir o horário
 
 ## Uso
 
 ```python
-from catalog.tools.datetime_tool import get_current_datetime, formatted_date_today
+from catalog.tools.datetime_tool import get_current_datetime
 
-# Português
+# Com horário (padrão)
 print(get_current_datetime())
-# Saída: "Segunda-feira, 4 de Fevereiro de 2026, 14:30:00"
+# PT: "Quinta-feira, 6 de Fevereiro de 2026, 14:30:45"
+# EN: "Thursday, February 6, 2026, 14:30:45"
 
-# Inglês
-print(formatted_date_today())
-# Saída: "Today is monday, february 4, 2026."
+# Apenas data
+print(get_current_datetime(include_time=False))
+# PT: "Quinta-feira, 6 de Fevereiro de 2026"
+# EN: "Thursday, February 6, 2026"
 ```
 
-## Funções
+## Função
 
-### get_current_datetime()
+### get_current_datetime(include_time: bool = True) -> str
 
-Retorna data e hora em português do Brasil.
+Retorna data/hora atual formatada.
 
-**Formato:** `{Dia da semana}, {dia} de {Mês} de {ano}, {HH:MM:SS}`
+**Parâmetros:**
+- `include_time`: Se `True` (padrão), inclui horário. Se `False`, retorna só a data.
 
-### formatted_date_today()
+**Retorno:**
+- String formatada com data e opcionalmente hora.
 
-Retorna apenas a data em inglês.
+**Idioma:**
+- Definido pela variável de ambiente `DATETIME_LANGUAGE`
+- Valores: `pt` (padrão) ou `en`
 
-**Formato:** `Today is {weekday}, {month} {day}, {year}.`
+## Configuração
+
+```bash
+# No .env
+DATETIME_LANGUAGE=pt  # ou "en" para inglês
+```
 
 ## Dependências
 

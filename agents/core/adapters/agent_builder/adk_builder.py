@@ -9,6 +9,7 @@ from agents.core.domain.agent.enums import AgentFlowType, CallbackType
 from agents.helpers import hooks, finops_callbacks
 from agents.core.adapters.agent_builder.adk_tools_builder import ADKToolsBuilder
 from agents.utils import prompt_functions
+from catalog.tools.datetime_tool import get_current_datetime
 from .model_builder import ModelBuilder
 from agents.core.domain.exceptions import (
     AgentConfigurationError,
@@ -136,7 +137,7 @@ class ADKAgentBuilder:
                     ),
                 ),
                 description = hierarchical_config.get("description"),
-                instruction = f"{prompt_functions.formatted_date_today()} \n {hierarchical_config.get('instruction')}",
+                instruction = f"{get_current_datetime(include_time=False)} \n {hierarchical_config.get('instruction')}",
                 sub_agents = all_agents,
                 **resolved_callbacks
             )
@@ -199,7 +200,7 @@ class ADKAgentBuilder:
                 name = name,
                 model = model,
                 description = description,  
-                instruction = f"{prompt_functions.formatted_date_today()} \n {instruction}",
+                instruction = f"{get_current_datetime(include_time=False)} \n {instruction}",
                 tools = tools,
                 planner=BuiltInPlanner(
                     thinking_config=types.ThinkingConfig(

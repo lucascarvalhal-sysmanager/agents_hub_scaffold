@@ -92,7 +92,7 @@ class ADKToolsBuilder:
             ToolsType.SSE: lambda cfg: self._create_sse_tool(tool_name=cfg.get("name", ""), url=cfg.get("url", "")),
             ToolsType.STREAMABLE: lambda cfg: self._create_streamable_tool(tool_name=cfg.get("name", ""), url=cfg.get("url", ""), headers=cfg.get("headers", None)),
             ToolsType.STDIO: lambda cfg: self._create_stdio_tool(tool_name=cfg.get("name", ""), configs=cfg.get("configs", "")),
-            ToolsType.PRE_BUILT: lambda cfg: self._get_pre_built_tool(tool_name=cfg.get("type", ""), params=cfg.get("params", {}))
+            ToolsType.PRE_BUILT: lambda cfg: self._get_pre_built_tool(tool_name=cfg.get("kind", ""), params=cfg.get("params", {}))
         }
             
         tools: List[Union[MCPToolset, FunctionTool]] = []

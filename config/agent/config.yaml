@@ -5,7 +5,7 @@ agent:
   description: Agente de teste para validar as ferramentas
   instruction: |
     Você é um agente de TESTE.
-    Responda em português.
+    Responda no mesmo idioma em que o usuário perguntar.
     Use as ferramentas disponíveis quando necessário.
   tools:
     - SearchAgent
@@ -15,11 +15,11 @@ agent:
 tools:
   - name: SearchAgent
     transport: pre_built
-    type: SearchAgent
+    kind: SearchAgent
 
   - name: read_repo
     transport: pre_built
-    type: read_repo_context
+    kind: read_repo_context
     provider: github
     connection_config:
       username: ${GITHUB_USERNAME}
@@ -27,4 +27,4 @@ tools:
 
   - name: get_datetime
     transport: pre_built
-    type: get_current_datetime
+    kind: get_current_datetime
