@@ -1,3 +1,3 @@
-from .tool import send_email_tool, SendEmailInput
+from .tool import send_email_tool
 
-__all__ = ["send_email_tool", "SendEmailInput"]
+__all__ = ["send_email_tool"]

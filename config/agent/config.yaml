@@ -11,6 +11,7 @@ agent:
     - SearchAgent
     - read_repo
     - get_datetime
+    - send_email
 
 tools:
   - name: SearchAgent
@@ -28,3 +29,11 @@ tools:
   - name: get_datetime
     transport: pre_built
     kind: get_current_datetime
+
+  - name: send_email
+    transport: pre_built
+    kind: send_email_tool
+    provider: gmail
+    connection_config:
+      user: ${EMAIL_USER}
+      password: ${EMAIL_PASSWORD}

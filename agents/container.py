@@ -34,7 +34,7 @@ class Container:
         connection_config = email_config.get("connection_config")
         logger.debug(f"Configurando serviço de email com provider '{provider}' e configuração '{connection_config}'")
 
-        if provider and connection_config:
+        if provider and connection_config is not None:
             return EmailServiceFactory.get_email_service(provider, connection_config)
         
         return None

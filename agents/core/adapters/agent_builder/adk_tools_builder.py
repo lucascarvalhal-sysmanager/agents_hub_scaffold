@@ -6,6 +6,7 @@ from mcp.client.stdio import StdioServerParameters
 
 from agents.core.domain.agent.enums import ToolsType, PreBuiltTools
 from agents.utils import pre_built_functions, adk_pre_built_tools, prompt_functions
+from catalog.tools.send_email import tool as catalog_send_email
 
 logger = logging.getLogger(__name__)
 
@@ -66,7 +67,7 @@ class ADKToolsBuilder:
         try:
             pre_built_functions_map: dict[str, Callable[[dict], FunctionTool]] = {
                 PreBuiltTools.READ_REPO_CONTEXT: lambda _: pre_built_functions.read_repo_context,
-                PreBuiltTools.SEND_EMAIL: lambda _: pre_built_functions.send_email_tool,
+                PreBuiltTools.SEND_EMAIL: lambda _: catalog_send_email.send_email_tool,
                 PreBuiltTools.GOOGLE_SEARCH: lambda _: adk_pre_built_tools.search_agent_tool,
                 PreBuiltTools.VERTEX_RAG_RETRIEVAL: adk_pre_built_tools.build_vertex_rag_tool,
                 PreBuiltTools.GET_DATETIME: lambda _: prompt_functions.get_current_datetime,
