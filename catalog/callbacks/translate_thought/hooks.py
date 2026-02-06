@@ -15,19 +15,6 @@ logger = logging.getLogger(__name__)
 TRANSLATION_MODEL = "gemini-2.5-flash-lite"
 MIN_TEXT_LENGTH = 10
 
-
-def inject_log_before_tool_callback(
-    tool: BaseTool,
-    args: Dict[str, Any],
-    tool_context: ToolContext
-):
-    """Log antes de executar uma tool."""
-    agent_name = tool_context.agent_name
-    tool_name = tool.name
-    logger.info(f"[Tool] {agent_name}: Start tool call '{tool_name}'")
-    return None
-
-
 def _translate_to_ptbr(text: str) -> Tuple[str, Optional[types.GenerateContentResponseUsageMetadata], float]:
     """Traduz texto do inglês para português usando Gemini."""
     if not text or len(text.strip()) < MIN_TEXT_LENGTH:

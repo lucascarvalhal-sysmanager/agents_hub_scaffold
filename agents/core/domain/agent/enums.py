@@ -17,7 +17,6 @@ class PreBuiltTools(str, Enum):
     """Tipos de ferramentas pré-construídas."""
     READ_REPO_CONTEXT = "read_repo_context"
     GOOGLE_SEARCH = "SearchAgent"
-    SMART_SEARCH = "SmartSearchAgent"
     SEND_EMAIL = "send_email_tool"
     VERTEX_RAG_RETRIEVAL = "vertex_rag_retrieval"
     GET_DATETIME = "get_current_datetime"

@@ -2,20 +2,20 @@ type: single
 agent:
   name: test_agent
   model: gemini-2.5-pro
-  description: Agente de teste para validar as skills
+  description: Agente de teste para validar as ferramentas
   instruction: |
     Você é um agente de TESTE.
     Responda em português.
     Use as ferramentas disponíveis quando necessário.
   tools:
-    - SmartSearchAgent
+    - SearchAgent
     - read_repo
     - get_datetime
 
 tools:
-  - name: SmartSearchAgent
+  - name: SearchAgent
     transport: pre_built
-    type: SmartSearchAgent
+    type: SearchAgent
 
   - name: read_repo
     transport: pre_built

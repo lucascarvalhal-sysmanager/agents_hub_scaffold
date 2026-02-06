@@ -68,7 +68,6 @@ class ADKToolsBuilder:
                 PreBuiltTools.READ_REPO_CONTEXT: lambda _: pre_built_functions.read_repo_context,
                 PreBuiltTools.SEND_EMAIL: lambda _: pre_built_functions.send_email_tool,
                 PreBuiltTools.GOOGLE_SEARCH: lambda _: adk_pre_built_tools.search_agent_tool,
-                PreBuiltTools.SMART_SEARCH: lambda _: adk_pre_built_tools.smart_search_tool,
                 PreBuiltTools.VERTEX_RAG_RETRIEVAL: adk_pre_built_tools.build_vertex_rag_tool,
                 PreBuiltTools.GET_DATETIME: lambda _: prompt_functions.get_current_datetime,
             }

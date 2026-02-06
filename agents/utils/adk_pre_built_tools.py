@@ -1,20 +1,26 @@
-"""
-ADK Pre-Built Tools - Re-exporta do catálogo para manter compatibilidade.
+from google.adk.agents import Agent
+from google.adk.tools.agent_tool import AgentTool
+from google.adk.tools.google_search_tool import google_search
+from google.adk.tools.retrieval.vertex_ai_rag_retrieval import VertexAiRagRetrieval
+from vertexai.preview import rag
 
-Os códigos reais estão em:
-- catalog/tools/google_search/
-- catalog/tools/vertex_rag/
-- catalog/tools/smart_search_tool/
-"""
-
-from catalog.tools.google_search import search_agent, search_agent_tool
-from catalog.tools.vertex_rag import build_vertex_rag_tool
-from catalog.tools.smart_search_tool import smart_search_tool, smart_search_agent
-
-__all__ = [
-    "search_agent",
-    "search_agent_tool",
-    "build_vertex_rag_tool",
-    "smart_search_tool",
-    "smart_search_agent",
-]
+search_agent = Agent(
+    model='gemini-2.5-flash',
+    name='SearchAgent',
+    instruction="""You're a specialist in Google Search""",
+    tools=[google_search],
+)
+search_agent_tool = AgentTool(search_agent)
+        
+def build_vertex_rag_tool(params: dict) -> VertexAiRagRetrieval:
+    return VertexAiRagRetrieval(
+        name=params.get("name", "retrieve_rag_documentation"),
+        description=params["description"],
+        rag_resources=[
+            rag.RagResource(
+                rag_corpus=params["rag_corpus"]
+            )
+        ],
+        similarity_top_k=params.get("similarity_top_k", 10),
+        vector_distance_threshold=params.get("vector_distance_threshold", 0.5),
+    )

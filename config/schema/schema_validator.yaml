@@ -18,40 +18,7 @@ properties:
           type: string
         transport:
           type: string
-          enum: [sse, stdio, streamable, pre_built]
-        # SSE and Streamable properties
-        url:
-          type: string
-        headers:
-          type: object
-          additionalProperties:
-            type: string
-        # Stdio properties
-        command:
-          type: string
-        args:
-          type: array
-          items:
-            type: string
-        env:
-          type: object
-          additionalProperties:
-            type: string
-        tool_filter:
-          type: array
-          items:
-            type: string
-        # Pre-built properties
-        type:
-          type: string
-        provider:
-          type: string
-        connection_config:
-          type: object
-          additionalProperties:
-            type: string
-        params:
-          type: object
+          enum: [sse, stdio, streamable]
       allOf:
         - if:
             properties:
@@ -99,23 +66,6 @@ properties:
                 type: array
                 items:
                   type: string
-        - if:
-            properties:
-              transport:
-                const: pre_built
-          then:
-            required: [type]
-            properties:
-              type:
-                type: string
-              provider:
-                type: string
-              connection_config:
-                type: object
-                additionalProperties:
-                  type: string
-              params:
-                type: object
       additionalProperties: false
 
   type:
@@ -146,48 +96,6 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/agent"
-      callbacks:
-        type: object
-        properties:
-          before_agent_callback:
-            type: array
-            items:
-              type: string
-          after_agent_callback:
-            type: array
-            items:
-              type: string
-          before_model_callback:
-            type: array
-            items:
-              type: string
-          after_model_callback:
-            type: array
-            items:
-              type: string
-          before_tool_callback:
-            type: array
-            items:
-              type: string
-          after_tool_callback:
-            type: array
-            items:
-              type: string
-        additionalProperties: false
-      generate_content_config:
-        type: object
-        properties:
-          temperature:
-            type: number
-          max_output_tokens:
-            type: integer
-          top_k:
-            type: integer
-          top_p:
-            type: number
-          thinking_budget:
-            type: integer
-        additionalProperties: false
     additionalProperties: false
 
 additionalProperties: false

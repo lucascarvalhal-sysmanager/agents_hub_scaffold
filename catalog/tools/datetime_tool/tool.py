@@ -1,46 +1,38 @@
+import os
 from datetime import datetime
 
 
-def formatted_date_today() -> str:
-    """
-    Retorna a data atual formatada em inglês.
-
-    Returns:
-        str: Data no formato "Today is {weekday}, {month} {day}, {year}."
-    """
-    weekdays = ["monday", "tuesday", "wednesday", "thursday",
-                "friday", "saturday", "sunday"]
-    months = ["january", "february", "march", "april", "may", "june",
-              "july", "august", "september", "october", "november", "december"]
-
-    today = datetime.now()
-    weekday = weekdays[today.weekday()]
-    day = today.day
-    month = months[today.month - 1]
-    year = today.year
-
-    return f"Today is {weekday}, {month} {day}, {year}."
-
-
-def get_current_datetime() -> str:
-    """
-    Retorna a data e hora atual formatada em português do Brasil.
-    Use esta ferramenta quando o usuário perguntar sobre data, hora,
-    dia da semana ou qualquer informação temporal.
-
-    Returns:
-        str: Data e hora no formato "Dia da semana, DD de Mês de AAAA, HH:MM:SS"
-    """
+def ptbr_formatted_datetime() -> str:
     dias_semana = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira",
                    "Sexta-feira", "Sábado", "Domingo"]
     meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
              "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
 
-    agora = datetime.now()
-    dia_semana = dias_semana[agora.weekday()]
-    dia = agora.day
-    mes = meses[agora.month - 1]
-    ano = agora.year
-    hora = agora.strftime("%H:%M:%S")
+    now = datetime.now()
+    return f"{dias_semana[now.weekday()]}, {now.day} de {meses[now.month - 1]} de {now.year}, {now.strftime('%H:%M:%S')}"
 
-    return f"{dia_semana}, {dia} de {mes} de {ano}, {hora}"
+
+def enus_formatted_datetime() -> str:
+    weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday",
+                "Friday", "Saturday", "Sunday"]
+    months = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"]
+
+    now = datetime.now()
+    return f"{weekdays[now.weekday()]}, {months[now.month - 1]} {now.day}, {now.year}, {now.strftime('%H:%M:%S')}"
+
+
+
+def formatted_date_today() -> str:
+    language = os.getenv("DATETIME_LANGUAGE", "pt")
+
+    dispatch_map = {
+        "pt": ptbr_formatted_datetime,
+        "en": enus_formatted_datetime,
+    }
+
+    if language in dispatch_map:
+        result = dispatch_map[language]()
+        return result.rsplit(",", 1)[0]
+
+    return dispatch_map["pt"]().rsplit(",", 1)[0]

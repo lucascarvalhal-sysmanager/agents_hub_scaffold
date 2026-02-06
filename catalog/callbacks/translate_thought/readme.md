@@ -7,7 +7,6 @@ Callback que intercepta e traduz os pensamentos (thoughts) do modelo Gemini para
 - Detecta partes da resposta marcadas como `thought=True`
 - Traduz automaticamente o texto para português usando Gemini 2.0 Flash
 - Contabiliza tokens usados na tradução para FinOps
-- Gera relatórios de uso para side-channels
 
 ## Uso
 
