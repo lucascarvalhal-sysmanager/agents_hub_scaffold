@@ -45,7 +45,7 @@ Scaffold/
 | `vertex_rag` | FunctionTool | RAG com Vertex AI |
 | `read_repo_context` | FunctionTool | Lê repositórios GitHub |
 | `send_email` | FunctionTool | Envia emails |
-| `datetime_tool` | FunctionTool | Data/hora atual (PT, EN, ES) via dispatch_map |
+| `datetime_tool` | FunctionTool | Data/hora atual (PT, EN, ES) via TRANSLATIONS |
 
 ### Skills (catalog/skills/)
 
@@ -184,24 +184,27 @@ tools:
     kind: minha_tool      # ← usar 'kind', não 'type'
 ```
 
-## Padrão Dispatch Map
+## Filosofia de Código
 
-Usado para extensibilidade sem criar múltiplas funções:
+- **Dados separados de lógica** - constantes no topo, comportamento embaixo
+- **Uma função faz o trabalho** - só quebra em mais quando realmente precisa
+- **Sem repetição** - se algo se repete, vira dado, não código duplicado
+- **Erros como retorno** - tools retornam strings de erro (não exceções), para o ADK não quebrar
+- **Prático e direto** - faz o que precisa, sem over-engineering
 
+Exemplo (datetime_tool):
 ```python
-# Dispatch baseado em DADOS (não funções)
-dispatch_map = {
+TRANSLATIONS = {
     "pt": { "days": [...], "months": [...], "format": "..." },
     "en": { "days": [...], "months": [...], "format": "..." },
 }
 
 def get_current_datetime():
     language = os.getenv("DATETIME_LANGUAGE", "pt")
-    trans = dispatch_map.get(language, dispatch_map["pt"])
-    # usa trans["days"], trans["months"], trans["format"]
+    trans = TRANSLATIONS.get(language, TRANSLATIONS["pt"])
 ```
 
-**Para adicionar novo idioma:** apenas adicionar entrada no dispatch_map, sem criar nova função.
+**Para adicionar novo idioma:** apenas adicionar entrada no TRANSLATIONS, sem criar nova função.
 
 ## Diferença: type vs kind
 
@@ -227,6 +230,14 @@ tools:
 
 ## Histórico de Desenvolvimento
 
+- **2026-02-06:** Refatoração read_repo_context e correção container.py
+  - Corrigido container.py para buscar tools por `kind` em vez de `type`
+  - Refatorado read_repo_context: subprocess unificado com `communicate()`, erros como retorno string
+  - Removido `RepoReadError` (usa RuntimeError no catálogo, retorno string no pre_built)
+  - Corrigida validação: `or` → `and` (exige todos os campos de autenticação)
+  - Renomeado `dispatch_map` → `TRANSLATIONS` no datetime_tool
+  - Adicionado `--style markdown` no repomix
+
 - **2026-02-06:** Refatoração de configuração e datetime_tool
   - Renomeado campo `type` para `kind` nas tools pre_built (evita conflito com `type: single` do agente)
   - Atualizado schema_validator.yaml para validar `kind`
@@ -251,6 +262,6 @@ tools:
 - `agents/core/adapters/agent_builder/adk_builder.py` - Construtor do agente
 - `agents/core/adapters/agent_builder/adk_tools_builder.py` - Construtor de tools (busca `kind`)
 - `agents/utils/prompt_functions.py` - FunctionTools para o agente
-- `catalog/tools/datetime_tool/tool.py` - Exemplo de dispatch_map baseado em dados
+- `catalog/tools/datetime_tool/tool.py` - Exemplo de TRANSLATIONS baseado em dados
 - `catalog/callbacks/finops_after_agent/callback.py` - Integração skill + callback
 - `catalog/skills/analyze_performance/skill.py` - Lógica de análise de performance
