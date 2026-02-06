@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-dispatch_map = {
+TRANSLATIONS = {
     "pt": {
         "days": ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira",
                  "Sexta-feira", "Sábado", "Domingo"],
@@ -27,9 +27,9 @@ dispatch_map = {
 
 
 def get_current_datetime(include_time: bool = True) -> str:
-
+ 
     language = os.getenv("DATETIME_LANGUAGE", "pt")
-    trans = dispatch_map.get(language, dispatch_map["pt"])
+    trans = TRANSLATIONS.get(language, TRANSLATIONS["pt"])
     now = datetime.now()
 
     result = trans["format"].format(

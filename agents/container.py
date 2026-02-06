@@ -24,7 +24,7 @@ class Container:
         tools_config = self.config.get("tools", [])
         email_config = None
         for tool in tools_config:
-            if tool.get("type") == PreBuiltTools.SEND_EMAIL:
+            if tool.get("kind") == PreBuiltTools.SEND_EMAIL:
                 email_config = tool
         
         if not email_config:
@@ -43,7 +43,7 @@ class Container:
         tools_config = self.config.get("tools", [])
         github_config = None
         for tool in tools_config:
-            if tool.get("type") == PreBuiltTools.READ_REPO_CONTEXT:
+            if tool.get("kind") == PreBuiltTools.READ_REPO_CONTEXT:
                 github_config = tool
         
         if github_config is None:
