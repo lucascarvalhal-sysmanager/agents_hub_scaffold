@@ -1,0 +1,15 @@
+metadata:
+  name: translate_thought
+  version: 1.0.0
+  description: Traduz pensamentos do modelo Gemini para português brasileiro
+  author: Eneva Foundations IA
+  kind: after_model_callback
+
+entry_point: hooks.translate_thought
+
+dependencies:
+  - finops_persistence
+
+config:
+  translation_model: gemini-2.0-flash
+  

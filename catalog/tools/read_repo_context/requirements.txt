@@ -1,0 +1,2 @@
+# Dependências Python (nenhuma específica)
+# Requer git e npx instalados no sistema

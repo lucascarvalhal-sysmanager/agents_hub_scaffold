@@ -1,0 +1,23 @@
+metadata:
+  name: finops_after_agent
+  version: 1.1.0
+  description: Persiste relatórios FinOps em batch e gera relatório de performance
+  author: Eneva Foundations IA
+  kind: after_agent_callback
+  execution_order: 3
+
+entry_point: callback.persist_finops_metrics
+
+dependencies:
+  - finops_persistence
+  - finops_after_model
+
+skills_integrated:
+  - analyze_performance
+
+config:
+  env_vars:
+    PERFORMANCE_REPORT_ENABLED: "true"
+    PERFORMANCE_REPORT_LOG: "true"
+    PERFORMANCE_REPORT_SAVE: "false"
+    PERFORMANCE_REPORT_DIR: ".adk/performance_reports"

@@ -1,0 +1,9 @@
+metadata:
+  name: google_search
+  version: 1.0.0
+  description: Agente especializado em buscas no Google
+  author: Eneva Foundations IA
+  kind: agent_tool
+  model: Escolha seu modelo
+
+entry_point: tool.search_agent_tool

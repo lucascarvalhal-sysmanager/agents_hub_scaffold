@@ -1,0 +1,13 @@
+metadata:
+  name: finops_after_model
+  version: 1.0.0
+  description: Coleta métricas de uso após a chamada ao modelo
+  author: Eneva Foundations IA
+  kind: after_model_callback
+  execution_order: 2
+
+entry_point: callback.collect_finops_metrics
+
+dependencies:
+  - finops_persistence
+  - finops_before_model

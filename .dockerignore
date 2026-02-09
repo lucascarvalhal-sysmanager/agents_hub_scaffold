@@ -1,0 +1,41 @@
+# === Diretórios e arquivos irrelevantes ===
+__pycache__
+docs
+repomix-output.xml
+roadmap.md
+
+# === Arquivos git ===
+.git
+.github
+
+# === Arquivos de instruções para IA ===
+.bmad-core
+.gemini
+
+# === Arquivos de configuração locais ===
+.env
+*.log
+*.lock
+.venv
+
+# === Arquivos do editor e sistema ===
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+
+# === Testes e exemplos ===
+tests
+examples
+
+# === Cache e build ===
+*.pyc
+*.pyo
+*.pyd
+*.egg-info
+build
+dist
+
+# === Dependências opcionais ===
+*.bak
+*.swp

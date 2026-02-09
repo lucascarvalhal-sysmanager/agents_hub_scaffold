@@ -1,0 +1,39 @@
+type: single
+agent:
+  name: test_agent
+  model: gemini-2.5-pro
+  description: Agente de teste para validar as ferramentas
+  instruction: |
+    Você é um agente de TESTE.
+    Responda no mesmo idioma em que o usuário perguntar.
+    Use as ferramentas disponíveis quando necessário.
+  tools:
+    - SearchAgent
+    - read_repo
+    - get_datetime
+    - send_email
+
+tools:
+  - name: SearchAgent
+    transport: pre_built
+    kind: SearchAgent
+
+  - name: read_repo
+    transport: pre_built
+    kind: read_repo_context
+    provider: github
+    connection_config:
+      username: ${GITHUB_USERNAME}
+      token: ${GITHUB_TOKEN}
+
+  - name: get_datetime
+    transport: pre_built
+    kind: get_current_datetime
+
+  - name: send_email
+    transport: pre_built
+    kind: send_email_tool
+    provider: gmail
+    connection_config:
+      user: ${EMAIL_USER}
+      password: ${EMAIL_PASSWORD}
