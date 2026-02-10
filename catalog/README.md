@@ -120,30 +120,26 @@ Tools são chamadas diretamente pelo agente
 Para contribuir com o catálogo, todo componente deve seguir estas regras:
 
 1. **Estrutura padronizada** — respeitar os arquivos obrigatórios de cada tipo
-2. **spec.yaml preenchido** — nome, versão, descrição, autor e kind
+2. **spec.yaml preenchido** — campos obrigatórios: `name`, `version`, `description`, `author` e `entry_point`. Campos extras podem ser adicionados quando necessário para dar instruções (ex: `requires_auth`, `external_deps`, `model`)
 3. **readme.md completo** — visão geral, como funciona, uso, configuração e registro
 4. **Código isolado** — a implementação (tool.py, callback.py) deve ter o mínimo de dependências externas
-5. **Erros como retorno** — tools retornam strings de erro em vez de exceções, para o agente receber feedback sem quebrar
 
 ## Estrutura do Repositório
 
 ```
 catalog/
-├── README.md              ← Este arquivo
+├── README.md
 ├── tools/
-│   ├── README.md          ← Guia de tools + como criar uma nova
-│   ├── google_search/
-│   ├── read_repo_context/
-│   ├── send_email/
-│   └── datetime_tool/
+│   ├── README.md
+│   ├── tool_1/
+│   ├── tool_2/
+│   └── tool_n/
 ├── skills/
 │   ├── README.md
-│   └── (contribuições futuras)
+│   ├── skill_1/
+│   └── skill_n/
 └── callbacks/
     ├── README.md
-    ├── translate_thought/
-    ├── finops_before_model/
-    ├── finops_after_model/
-    ├── finops_after_agent/
-    └── finops_persistence/
+    ├── callback_1/
+    └── callback_n/
 ```
