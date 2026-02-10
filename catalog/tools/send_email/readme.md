@@ -1,12 +1,11 @@
 # Send Email Tool
 
-Envia emails usando o serviço de email configurado no container de dependências. O agente chama esta tool quando precisa enviar um email, passando destinatário, assunto e conteúdo.
+Envia emails para destinatários usando o serviço de email configurado.
 
 ## Visão Geral
 
 | | |
 |---|---|
-| **Kind** | `function_tool` |
 | **Entry Point** | `tool.send_email_tool` |
 | **Provider** | Gmail (configurável) |
 | **Dependências** | `google-auth`, `google-auth-oauthlib` |
@@ -121,13 +120,3 @@ O `Container` lê essa configuração e instancia o `GmailService` automaticamen
 | `gmail` | `EmailProvider.GMAIL` | Envio via SMTP do Gmail |
 | `fake_email` | `EmailProvider.FAKE_EMAIL` | Mock para testes (não envia de verdade) |
 
-## Estrutura
-
-```
-send_email/
-├── __init__.py        # Exporta send_email_tool
-├── tool.py            # Implementação usando o container de serviços
-├── spec.yaml          # Metadados e configuração
-├── requirements.txt   # google-auth, google-auth-oauthlib
-└── readme.md          # Esta documentação
-```

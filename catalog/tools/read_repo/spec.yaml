@@ -1,5 +1,5 @@
 metadata:
-  name: read_repo_context
+  name: read_repo
   version: 1.0.0
   description: Lê o contexto de um repositório Git usando repomix
   author: Eneva Foundations IA

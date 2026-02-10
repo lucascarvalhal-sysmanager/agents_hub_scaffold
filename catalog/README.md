@@ -4,7 +4,7 @@
 
 Centralizar todos os componentes reutilizáveis para agentes de IA em um único lugar. O catálogo funciona como um registry interno onde qualquer time pode consumir implementações prontas e documentadas, ou contribuir com novas tools, callbacks e skills, seguindo as convenções de governança definidas neste repositório.
 
-## Arquitetura
+## Arquitetura e Estrutura
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -30,6 +30,35 @@ Centralizar todos os componentes reutilizáveis para agentes de IA em um único 
 │ readme     readme  │    │         │     │ readme.md    readme.md│
 │         │          │         │          │           │           │
 └────────────────────┴────────────────────┴───────────────────────┘
+```
+
+```
+catalog/
+├── README.md
+├── tools/
+│   ├── README.md
+│   ├── tool_1/
+│   │   ├── __init__.py
+│   │   ├── tool.py
+│   │   ├── spec.yaml
+│   │   └── requirements.txt
+│   └── tool_n/
+├── skills/
+│   ├── README.md
+│   ├── skill_1/
+│   │   ├── __init__.py
+│   │   ├── skill.py
+│   │   ├── spec.yaml
+│   │   └── requirements.txt
+│   └── skill_n/
+└── callbacks/
+    ├── README.md
+    ├── callback_1/
+    │   ├── __init__.py
+    │   ├── callback.py
+    │   ├── spec.yaml
+    │   └── requirements.txt
+    └── callback_n/
 ```
 
 ## Tipos de Componentes
@@ -124,22 +153,3 @@ Para contribuir com o catálogo, todo componente deve seguir estas regras:
 3. **readme.md completo** — visão geral, como funciona, uso, configuração e registro
 4. **Código isolado** — a implementação (tool.py, callback.py) deve ter o mínimo de dependências externas
 
-## Estrutura do Repositório
-
-```
-catalog/
-├── README.md
-├── tools/
-│   ├── README.md
-│   ├── tool_1/
-│   ├── tool_2/
-│   └── tool_n/
-├── skills/
-│   ├── README.md
-│   ├── skill_1/
-│   └── skill_n/
-└── callbacks/
-    ├── README.md
-    ├── callback_1/
-    └── callback_n/
-```

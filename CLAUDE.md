@@ -40,10 +40,10 @@ Scaffold/
 
 | Tool | Kind | Descrição |
 |------|------|-----------|
-| `google_search` | agent_tool | Busca no Google (SearchAgent) |
-| `read_repo_context` | async_function_tool | Lê repositórios GitHub via repomix |
-| `send_email` | function_tool | Envia emails via Gmail |
-| `datetime_tool` | function_tool | Data/hora atual (PT, EN, ES) via TRANSLATIONS |
+| `google_search` | agent_tool | Realiza pesquisas e retorna os resultados processados |
+| `read_repo` | async_function_tool | Lê o contexto completo de um repositório Git |
+| `send_email` | function_tool | Envia emails para destinatários usando o serviço configurado |
+| `datetime` | function_tool | Retorna data e hora atual formatada em múltiplos idiomas |
 
 ### Skills (catalog/skills/)
 
@@ -312,5 +312,5 @@ tools:
 - `agents/core/adapters/agent_builder/adk_builder.py` - Construtor do agente
 - `agents/core/adapters/agent_builder/adk_tools_builder.py` - Construtor de tools (busca `kind`)
 - `agents/utils/prompt_functions.py` - FunctionTools para o agente
-- `catalog/tools/datetime_tool/tool.py` - Exemplo de TRANSLATIONS baseado em dados
+- `catalog/tools/datetime/tool.py` - Exemplo de TRANSLATIONS baseado em dados
 - `catalog/callbacks/finops_after_agent/callback.py` - Integração callback + persistência

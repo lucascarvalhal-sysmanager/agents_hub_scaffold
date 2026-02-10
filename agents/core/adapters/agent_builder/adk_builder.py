@@ -9,7 +9,7 @@ from agents.core.domain.agent.enums import AgentFlowType, CallbackType
 from agents.helpers import hooks, finops_callbacks
 from agents.core.adapters.agent_builder.adk_tools_builder import ADKToolsBuilder
 from agents.utils import prompt_functions
-from catalog.tools.datetime_tool import get_current_datetime
+from catalog.tools.datetime import get_current_datetime
 from .model_builder import ModelBuilder
 from agents.core.domain.exceptions import (
     AgentConfigurationError,

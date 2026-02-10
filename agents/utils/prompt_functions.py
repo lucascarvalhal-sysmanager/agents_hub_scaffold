@@ -1,5 +1,5 @@
 from google.adk.tools import FunctionTool
-from catalog.tools.datetime_tool import get_current_datetime as _get_datetime_func
+from catalog.tools.datetime import get_current_datetime as _get_datetime_func
 
 
 def _get_current_datetime() -> str:

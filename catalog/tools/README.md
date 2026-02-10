@@ -16,10 +16,10 @@ O agente não conhece a implementação — ele só sabe o `kind` configurado no
 
 | Tool | Descrição |
 |------|-----------|
-| [google_search](./google_search/) | Agente especializado em buscas no Google |
-| [read_repo_context](./read_repo_context/) | Lê contexto de repositórios Git via repomix |
-| [send_email](./send_email/) | Envio de emails via Gmail |
-| [datetime_tool](./datetime_tool/) | Data e hora atual com suporte multi-idioma |
+| [google_search](./google_search/) | Realiza pesquisas e retorna os resultados processados |
+| [read_repo](./read_repo/) | Lê o contexto completo de um repositório Git |
+| [send_email](./send_email/) | Envia emails para destinatários usando o serviço configurado |
+| [datetime](./datetime/) | Retorna data e hora atual formatada em múltiplos idiomas |
 
 ## Estrutura de uma Tool
 
@@ -80,12 +80,8 @@ metadata:
   version: 1.0.0
   description: O que a tool faz
   author: Eneva Foundations IA
-  kind: function_tool
 
 entry_point: tool.minha_tool
-
-config:
-  # configurações específicas
 ```
 
 ### 5. Registrar no agente
@@ -124,7 +120,7 @@ agent:
 
 ### 6. Documentar
 
-Escreva o `readme.md` seguindo o padrão das tools existentes. Consulte o [datetime_tool](./datetime_tool/) como referência.
+Escreva o `readme.md` seguindo o padrão das tools existentes. Consulte o [datetime](./datetime/) como referência.
 
 ## Convenções
 

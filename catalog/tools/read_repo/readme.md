@@ -1,12 +1,11 @@
-# Read Repo Context Tool
+# Read Repo Tool
 
-Lê o contexto completo de um repositório Git e retorna em formato Markdown. Usa o [repomix](https://github.com/yamadashy/repomix) para extrair a estrutura e o conteúdo de todos os arquivos do repositório, permitindo que o agente entenda uma codebase inteira.
+Lê o contexto completo de um repositório Git e retorna em formato Markdown.
 
 ## Visão Geral
 
 | | |
 |---|---|
-| **Kind** | `async_function_tool` |
 | **Entry Point** | `tool.read_repo_context` |
 | **Requer Autenticação** | Sim (username + token) |
 | **Dependências Python** | Nenhuma (biblioteca padrão) |
@@ -57,7 +56,7 @@ As variáveis são referenciadas no `config.yaml` com a sintaxe `${VAR}`.
 ### Importando a função
 
 ```python
-from catalog.tools.read_repo_context import read_repo_context
+from catalog.tools.read_repo import read_repo_context
 ```
 
 ### Chamando a função (async)
@@ -137,13 +136,3 @@ tools:
       token: ${GITHUB_TOKEN}
 ```
 
-## Estrutura
-
-```
-read_repo_context/
-├── __init__.py        # Exporta read_repo_context
-├── tool.py            # Implementação async com git clone + repomix
-├── spec.yaml          # Metadados e configuração
-├── requirements.txt   # Sem dependências Python (requer git e npx no sistema)
-└── readme.md          # Esta documentação
-```

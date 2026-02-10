@@ -1,27 +1,26 @@
 # Google Search Tool
 
-Agente especializado em buscas no Google. Diferente de uma `function_tool`, esta é uma `agent_tool`, um sub-agente com modelo próprio que recebe a query, executa a busca e retorna os resultados processados.
+Realiza pesquisas e retorna os resultados processados.
 
 ## Visão Geral
 
 | | |
 |---|---|
-| **Kind** | `agent_tool` |
-| **Modelo** | `Coloque seu modelo de preferência (ex: gemini-2.5-flash)` |
 | **Entry Point** | `tool.search_agent_tool` |
+| **Modelo** | `gemini-2.5-flash` |
 | **Dependências** | `google-adk>=1.9.0` |
 
 ## Como Funciona
 
-A tool cria um sub-agente ADK com acesso à ferramenta nativa `google_search` do Google ADK. Quando o agente principal precisa buscar informações, ele delega para este sub-agente, que:
+A tool utiliza a ferramenta nativa `google_search` do Google ADK. Quando o agente principal precisa buscar informações:
 
 1. Recebe a query do agente principal
-2. Executa a busca via `google_search` (ferramenta nativa do ADK)
-3. Processa os resultados com o modelo da sua preferência
+2. Executa a busca via `google_search`
+3. Processa os resultados com o modelo configurado
 4. Retorna a resposta formatada ao agente principal
 
 ```
-Agente Principal → SearchAgent (gemini-2.5-flash) → google_search API → Resultados
+Agente Principal → Google Search Tool → google_search API → Resultados
 ```
 
 ## Uso
@@ -55,9 +54,9 @@ class PreBuiltTools(str, Enum):
     GOOGLE_SEARCH = "SearchAgent"
 ```
 
-### 2. Sub-agente como AgentTool
+### 2. AgentTool
 
-O sub-agente é criado em `agents/utils/adk_pre_built_tools.py` e encapsulado como `AgentTool`:
+A tool é criada em `agents/utils/adk_pre_built_tools.py` e encapsulada como `AgentTool`:
 
 ```python
 from google.adk.agents import Agent
@@ -97,13 +96,3 @@ tools:
     kind: SearchAgent
 ```
 
-## Estrutura
-
-```
-google_search/
-├── __init__.py        # Exporta search_agent_tool
-├── tool.py            # Cria o sub-agente e o AgentTool
-├── spec.yaml          # Metadados e configuração
-├── requirements.txt   # google-adk>=1.9.0
-└── readme.md          # Esta documentação
-```

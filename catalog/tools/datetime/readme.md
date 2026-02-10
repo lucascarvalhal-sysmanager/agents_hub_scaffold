@@ -1,12 +1,11 @@
 # Datetime Tool
 
-Ferramenta para obter data e hora atual formatada, com suporte a múltiplos idiomas. O agente utiliza esta tool quando precisa informar a data ou horário atual ao usuário.
+Retorna data e hora atual formatada em múltiplos idiomas.
 
 ## Visão Geral
 
 | | |
 |---|---|
-| **Kind** | `function_tool` |
 | **Entry Point** | `tool.get_current_datetime` |
 | **Dependências** | Nenhuma (biblioteca padrão) |
 
@@ -43,7 +42,7 @@ Se a variável não estiver definida, o idioma padrão é `pt`.
 ### Importando a função
 
 ```python
-from catalog.tools.datetime_tool import get_current_datetime
+from catalog.tools.datetime import get_current_datetime
 ```
 
 ### Obtendo data e hora
@@ -90,7 +89,7 @@ class PreBuiltTools(str, Enum):
 A função é encapsulada em um `FunctionTool` do ADK em `agents/utils/prompt_functions.py`. O wrapper adiciona a docstring que o modelo usa para decidir quando chamar a tool:
 
 ```python
-from catalog.tools.datetime_tool import get_current_datetime as _get_datetime_func
+from catalog.tools.datetime import get_current_datetime as _get_datetime_func
 
 def _get_current_datetime() -> str:
     """
@@ -144,13 +143,3 @@ TRANSLATIONS = {
 
 Não é necessário criar novas funções nem alterar nenhum outro arquivo.
 
-## Estrutura
-
-```
-datetime_tool/
-├── __init__.py        # Exporta get_current_datetime
-├── tool.py            # Implementação com TRANSLATIONS
-├── spec.yaml          # Metadados e configuração
-├── requirements.txt   # Vazio (sem dependências externas)
-└── readme.md          # Esta documentação
-```

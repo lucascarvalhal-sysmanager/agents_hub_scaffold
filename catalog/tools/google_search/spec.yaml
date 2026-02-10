@@ -1,8 +1,8 @@
 metadata:
   name: google_search
   version: 1.0.0
-  description: Agente especializado em buscas no Google
+  description: Realiza pesquisas e retorna os resultados processados
   author: Eneva Foundations IA
-  model: Escolha seu modelo
+  model: gemini-2.5-flash
 
 entry_point: tool.search_agent_tool
