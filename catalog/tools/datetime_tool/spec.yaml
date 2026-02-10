@@ -3,6 +3,5 @@ metadata:
   version: 1.1.0
   description: Ferramenta para obter data e hora atual
   author: Eneva Foundations IA
-  kind: function_tool
 
 entry_point: tool.get_current_datetime
